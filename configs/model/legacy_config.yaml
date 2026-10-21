@@ -1,0 +1,67 @@
+defaults:
+  - _base_
+
+# Model preset with a 512-unit recurrent state and a 96-channel CNN.
+rep_loss: "dreamer"
+
+lr: 1e-4
+model_lr: 1e-4
+eps: 1e-8
+opt_eps: 1e-8
+grad_clip: 1000.0
+weight_decay: 0.0
+
+deter: 512
+hidden: 512
+units: 512
+discrete: 32
+depth: 96
+act: 'SiLU'
+norm: True
+
+rssm:
+  deter: 512
+  hidden: 512
+  stoch: 32
+  discrete: 32
+
+dyn_deter: ${model.rssm.deter}
+dyn_stoch: ${model.rssm.stoch}
+dyn_discrete: ${model.rssm.discrete}
+
+encoder:
+  mlp:
+    layers: 5
+    units: 1024
+  cnn:
+    depth: 96
+    kernel_size: 4
+
+decoder:
+  mlp:
+    layers: 5
+    units: 1024
+  cnn:
+    depth: 96
+    kernel_size: 4
+
+actor:
+  layers: 2
+  units: 512
+  outscale: 1.0
+
+critic:
+  layers: 2
+  units: 512
+
+reward:
+  layers: 2
+  units: 512
+
+cont:
+  layers: 2
+  units: 512
+
+loss_scales:
+  dyn: 0.5
+  rep: 0.1

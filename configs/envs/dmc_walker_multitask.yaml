@@ -1,0 +1,24 @@
+# @package _global_
+
+defaults:
+  - dmc_proprio
+  - _self_
+
+# Concurrent task adaptation from a Walker Stand collector. Dreamer evaluates
+# its source-trained base actor on stand and detached heads on walk/run;
+# reward-free P2E evaluates detached heads on all three tasks.
+envs:
+  task: dmc_walker_stand
+  eval_tasks: [dmc_walker_stand, dmc_walker_walk, dmc_walker_run]
+  protocol: concurrent_detached_heads
+  # Native rewards are recorded as learner-only labels for detached heads.
+  backend: dm_control
+  env_num: 16
+  video_pred_log: false
+  video_policy_log: false
+
+trainer:
+  eval_action_selections: [greedy]
+
+model:
+  eval_task_heads: true

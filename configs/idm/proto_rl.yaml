@@ -1,0 +1,16 @@
+# @package model
+
+idm_type: proto_rl
+
+proto_rl_rep_dim: 128
+# Predictor hidden width (`pred_dim`) in the authors' implementation.
+proto_rl_pred_dim: 512
+proto_rl_num_prototypes: 512
+proto_rl_candidates_per_prototype: 4
+proto_rl_temperature: 0.1
+proto_rl_sinkhorn_iters: 3
+# Upstream encoder_target_tau=0.05 means target=.95*target+.05*online.
+proto_rl_target_momentum: 0.95
+proto_rl_knn_k: 3
+# Proto-RL uses the raw kth-neighbor distance as its exploration reward.
+proto_rl_reward_normalize: false

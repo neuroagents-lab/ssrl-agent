@@ -1,0 +1,48 @@
+# @package _global_
+
+# Multitask evaluation: Dreamer uses its base source-task actor and five
+# detached target heads; P2E uses six detached target heads.
+
+envs:
+  task: robokitchen_bottom_burner
+  eval_tasks:
+    - robokitchen_bottom_burner
+    - robokitchen_light_switch
+    - robokitchen_slide_cabinet
+    - robokitchen_hinge_cabinet
+    - robokitchen_microwave
+    - robokitchen_kettle
+  backend: mujoco
+  protocol: concurrent_detached_heads
+  steps: 5000000
+  env_num: 1
+  eval_episode_num: 10
+  eval_every: 100000
+  update_log_every: 5000
+  video_pred_log: false
+  video_policy_log: false
+  action_repeat: 1
+  train_ratio: 512
+  time_limit: 150
+
+  seed: ${seed}
+  device: ${device}
+
+  size: [64, 64]
+  include_image: true
+  eval_seed_offset: 1000000
+  eval_seed_bank: [1000000, 1000001, 1000002, 1000003, 1000004,
+                   1000005, 1000006, 1000007, 1000008, 1000009]
+  encoder:
+    typ: simple
+    mlp_keys: '$^'
+    cnn_keys: 'image'
+  decoder:
+    mlp_keys: '$^'
+    cnn_keys: 'image'
+
+trainer:
+  eval_action_selections: [greedy]
+
+model:
+  eval_task_heads: true

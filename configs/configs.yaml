@@ -1,0 +1,105 @@
+defaults:
+  - envs: dmc_vision
+  - model: size12M
+  - _self_
+  - algo: dreamer
+  - optional idm: null
+  # Disable Hydra's Python logging-to-file (train.log)
+  - override hydra/job_logging: disabled
+
+logdir: logdir/${now:%Y-%m-%d}/${now:%H-%M-%S}
+seed: 0
+deterministic_run: False
+device: 'cuda:0'
+agent_name: dreamerv3
+jax_autotune: 1
+jax_profiler: False
+jax_donate_policy_params: null
+jax_preallocate: True
+# Use an explicit cache directory or the default private XDG/home cache.
+jax_compilation_cache: True
+jax_compilation_cache_root: null
+jax_compilation_cache_dir: null
+jax_compilation_cache_min_compile_time_secs: 1.0
+jax_compilation_cache_min_entry_size_bytes: 0
+
+hydra:
+  run:
+    dir: ${logdir}
+
+batch_size: 16
+batch_length: 64
+
+buffer:
+  batch_size: ${batch_size}
+  batch_length: ${batch_length}
+  max_size: 5e5
+  chunksize: 1024
+  device: ${device}
+  storage_device: 'cuda:0'
+
+# Task adaptation binds the child run to a verified parent checkpoint.
+adaptation:
+  enabled: False
+  protocol: fresh_heads  # fresh_heads_10x uses 46880 updates; pretrained_heads uses 0
+  backend: ""
+  env_config: ${oc.select:envs.adaptation_env_config,''}
+  parent_task: ${oc.select:envs.adaptation_parent_task,''}
+  parent_env_config: ${oc.select:envs.adaptation_parent_env_config,''}
+  parent_algorithm: p2e
+  parent_idm: ""
+  parent_seed: 0
+  model: ""
+  parent_run_uid: ""
+  parent_source_digest: ""
+  parent_checkpoint: ""
+  parent_checkpoint_sha256: ""
+  parent_replay: ""
+  replay_inventory_sha256: ""
+  compatibility_certificate: ""
+  compatibility_certificate_sha256: ""
+  cohort_validation_receipt: ""
+  cohort_validation_receipt_sha256: ""
+  parent_replay_length: 65
+  pretraining_environment_steps: ${oc.select:envs.adaptation_parent_steps,5010000}
+  # Offline updates precede task interaction: ceil(150k * 32 / (16 * 64)).
+  # Set both the protocol and its update budget when overriding adaptation.
+  offline_updates: 4688
+  offline_save_every: 1000
+  # False for supervised Dreamer parents; true for task-blind P2E parents.
+  strict_task_blind_pretraining: True
+
+trainer:
+  steps: ${envs.steps}
+  pretrain: 0
+  replay_context: 1
+  eval_every: ${envs.eval_every}
+  eval_action_selections: ${oc.select:envs.eval_action_selections,[sampled,greedy]}
+  # Save checkpoints independently of evaluation.
+  save_every: 10000
+  eval_episode_num: ${envs.eval_episode_num}
+  # In-process evaluation avoids creating a CUDA context per host worker.
+  eval_env_num: 10
+  eval_parallel: False
+  batch_size: ${batch_size}
+  batch_length: ${batch_length}
+  train_ratio: ${envs.train_ratio}
+  video_pred_log: ${envs.video_pred_log}
+  video_policy_log: ${envs.video_policy_log}
+  params_hist_log: False
+  update_log_every: ${envs.update_log_every}
+  action_repeat: ${envs.action_repeat}
+
+wandb:
+  enabled: False
+  project: ssrl
+  entity: null
+  name: null
+  group: null
+  job_type: train
+  tags: []
+  notes: null
+  mode: ${oc.env:WANDB_MODE,online}
+  id: null
+  resume: allow
+  resume_from: null

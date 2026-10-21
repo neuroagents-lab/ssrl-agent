@@ -1,0 +1,29 @@
+# @package _global_
+
+defaults:
+  - dmc_walker_multitask
+  - _self_
+
+# Match the native dm_control parent observations, then adapt one task with
+# an independent ordinary world model and fresh reward/actor/value heads.
+envs:
+  task: dmc_walker_stand
+  eval_tasks: null
+  protocol: standard
+  backend: dm_control
+  env_num: 16
+  steps: 200000
+  eval_every: 20000
+  eval_action_selections: [greedy]
+  adaptation_env_config: dmc_walker_adaptation
+  adaptation_parent_task: dmc_walker_stand
+  adaptation_parent_env_config: dmc_walker_multitask
+  adaptation_parent_steps: 1010000
+
+model:
+  eval_task_heads: false
+  train_base_task_behavior: true
+  strict_task_blind_pretraining: false
+
+trainer:
+  eval_action_selections: [greedy]

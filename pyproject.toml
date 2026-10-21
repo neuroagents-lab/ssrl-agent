@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ssrl"
+version = "0.1.0"
+description = "JAX implementations of intrinsic motivation methods for world-model agents"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.11"
+dependencies = [
+    "jax>=0.4.33,<0.6",
+    "ninjax==3.6.3",
+]
+
+[project.optional-dependencies]
+cuda = ["jax[cuda12]>=0.4.33,<0.6"]
+
+[tool.setuptools]
+license-files = ["LICENSE"]
+
+[tool.setuptools.packages.find]
+include = ["ssrl", "ssrl.*"]
+namespaces = false

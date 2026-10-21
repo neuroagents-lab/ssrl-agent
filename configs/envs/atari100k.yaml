@@ -1,0 +1,33 @@
+task: atari_alien
+steps: 25e6
+env_num: 1
+eval_episode_num: 100
+eval_every: 10000
+update_log_every: 5000
+video_pred_log: False
+video_policy_log: False
+action_repeat: 1
+train_ratio: 128
+time_limit: 108000
+
+seed: ${seed}
+device: ${device}
+
+size: [64, 64]
+encoder:
+  mlp_keys: '$^'
+  cnn_keys: 'image'
+decoder:
+  mlp_keys: '$^'
+  cnn_keys: 'image'
+
+gray: False
+noops: 30
+lives: unused
+sticky: False
+actions: needed
+pooling: 2
+aggregate: max
+resize: pillow
+autostart: False
+clip_reward: False

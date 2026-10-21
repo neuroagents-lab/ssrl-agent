@@ -1,0 +1,5 @@
+# @package model
+
+idm_type: empowerment_forward
+use_skills: false
+empowerment_action_concat: true

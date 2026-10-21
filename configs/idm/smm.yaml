@@ -1,0 +1,18 @@
+# @package model
+
+idm_type: smm
+
+# State Marginal Matching (Lee, Eysenbach et al. 2019). A VAE density model q(s)
+# is fit to visited RSSM latents; the reward is log p*(s) - log q(s). With a
+# uniform target, log p*(s) is constant and the effective reward is -ELBO(s)
+# (reward novel / low-density latents). Replay provides the historical averaging.
+smm_latent_dim: 128
+smm_hidden_dim: 150
+smm_layers: 2
+smm_scale: 1.0
+smm_kl_scale: 0.5          # beta on KL(q(z|s) || N(0,I))
+smm_target: uniform        # uniform => log p*(s) is a constant (log_target_const)
+smm_log_target_const: 0.0
+smm_min_log_var: -7.0
+smm_max_log_var: 2.0
+smm_reward_normalize: false

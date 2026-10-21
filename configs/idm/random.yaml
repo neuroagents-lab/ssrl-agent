@@ -1,0 +1,20 @@
+# @package model
+
+# Random exploration data -> learned world model -> learned task policy.
+# Uses the same model/backend and task heads as other P2E experiments.
+idm_type: random
+use_skills: false
+strict_task_blind_pretraining: true
+expl_intr_scale: 0.0
+expl_extr_scale: 0.0
+
+# Released TF1 sampling: clip(clip(N(0,1), -1, 1) + N(0,1), -1, 1).
+# Set distribution=uniform for the paper definition (no added noise).
+# Discrete spaces always sample uniformly over valid integer actions.
+random_action_distribution: p2e
+random_action_noise: 1.0
+
+# The random collector has no exploration critic. Optional adaptive updates
+# therefore apply to the learned base task critic.
+adaptive_critic:
+  critics: value

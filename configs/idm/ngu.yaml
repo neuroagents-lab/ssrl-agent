@@ -1,0 +1,21 @@
+# @package model
+
+idm_type: ngu
+
+ngu_rep_dim: 32
+ngu_k: 10
+ngu_scale: 0.3
+ngu_kernel_epsilon: 1e-4
+ngu_cluster_distance: 8e-3
+ngu_pseudo_count_c: 1e-3
+ngu_max_similarity: 8.0
+ngu_lifelong_clip: 5.0
+ngu_use_rnd: true
+ngu_rnd_hidden_dim: ${model.idm_hidden_dim}
+ngu_rnd_output_dim: ${model.idm_hidden_dim}
+ngu_rnd_layers: 2
+ngu_inverse_coef: 1.0
+ngu_rnd_coef: 1.0
+ngu_vectorized_scan: true
+ngu_update_tail: 0
+ngu_eps: 1e-8

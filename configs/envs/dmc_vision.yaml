@@ -1,0 +1,36 @@
+# @package _global_
+
+envs:
+  task: 'dmc_walker_walk'
+  eval_tasks: null
+  backend: dm_control
+  steps: 1.01e6
+  env_num: 16
+  eval_episode_num: 10
+  eval_every: 100000
+  update_log_every: 5000
+  video_pred_log: False
+  video_policy_log: True
+  action_repeat: 1
+  train_ratio: 512
+  time_limit: 1000
+
+  seed: ${seed}
+  device: ${device}
+
+  size: [64, 64]
+  include_image: True
+  eval_seed_offset: 1000000
+  eval_seed_bank: [1000000, 1000001, 1000002, 1000003, 1000004,
+                   1000005, 1000006, 1000007, 1000008, 1000009]
+  encoder:
+    typ: simple  # Use simple for Dreamer's native CNN.
+    mlp_keys: '$^'
+    cnn_keys: 'image'
+  decoder:
+    mlp_keys: '$^'
+    cnn_keys: 'image'
+
+model:
+  expl_behavior: "greedy"
+  idm_type: "none"

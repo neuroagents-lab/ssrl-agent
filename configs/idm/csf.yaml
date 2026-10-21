@@ -1,0 +1,27 @@
+# @package model
+
+idm_type: csf
+idm_reward_norm_source: replay_only
+use_skills: true
+skill_space: sphere
+num_skills: 4
+skill_dim: 4
+skill_horizon: 0
+skill_embed_dim: 0
+csf_prior: uniform_hypersphere
+csf_proj_dim: 0
+csf_proj_hidden_dim: 1024
+csf_proj_layers: 2
+csf_reward_mode: inner
+csf_posterior: dot_product
+csf_temperature: 1.0
+csf_normalize_features: false
+csf_normalize_skills: false
+csf_input_norm: none
+csf_input_norm_eps: 1e-3
+csf_xi: 5.0
+csf_num_negatives: 256
+csf_sample_prior_negatives: true
+csf_exclude_positive_from_negatives: true
+csf_replay_batch_size: 256
+csf_offset: 1

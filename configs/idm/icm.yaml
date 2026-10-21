@@ -1,0 +1,12 @@
+# @package model
+
+# Pathak et al. ICM with a learned feature projector and beta-weighted
+# forward/inverse objective.
+idm_type: icm
+
+icm_proj_dim: ${model.idm_output_dim}
+icm_proj_hidden_dim: ${model.idm_hidden_dim}
+icm_proj_layers: 1
+icm_forward_loss_weight: 0.2
+# PREDICTION_BETA in the authors' implementation.
+icm_scale: 0.01

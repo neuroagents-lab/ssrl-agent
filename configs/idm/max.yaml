@@ -1,0 +1,15 @@
+# @package model
+
+# Jensen-Renyi divergence of probabilistic forward-model predictions.
+# Shyam et al. (2019), Eq. 9.
+idm_type: max
+max_models: 5
+max_hidden_dim: 256
+max_layers: 2
+max_chunk_size: 0
+idm_act: relu
+max_scale: 1.0
+max_lambda: 0.1
+max_min_log_var: -10.0
+max_max_log_var: 2.0
+max_normalize: false

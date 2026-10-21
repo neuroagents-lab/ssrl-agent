@@ -1,0 +1,21 @@
+# @package model
+
+idm_type: rdads
+idm_reward_normalize: true
+idm_reward_norm_source: replay_only
+idm_hidden_dim: 512
+idm_n_layers: 2
+expl_bridge_hidden_dim: 256
+expl_bridge_layers: 2
+expl_bridge_loss_weight: 1.0
+use_skills: true
+skill_space: box
+num_skills: 2
+skill_dim: 2
+skill_horizon: 200
+skill_embed_dim: 0
+rdads_prior: uniform_box
+rdads_entropy_coef: 0.0
+continuous_skill_posterior: gaussian
+continuous_skill_temperature: 0.1
+rdads_replay_batch_size: 256

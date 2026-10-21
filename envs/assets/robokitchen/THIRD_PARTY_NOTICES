@@ -1,0 +1,26 @@
+RoboKitchen / D'Suite model assets
+==================================
+
+Copyright 2019 The DSuite Authors. All rights reserved.
+
+The kitchen model, scene, mesh, and texture assets are distributed under the
+Apache License 2.0. See `LICENSE-DSUITE-APACHE-2.0.txt`.
+
+
+Franka Panda model assets
+=========================
+
+The Franka Panda model files were distributed by the upstream benchmark under
+the Apache License 2.0. See `LICENSE-FRANKA-APACHE-2.0.txt` and
+`third_party/franka/LICENSE`.
+
+
+Google controller scene
+=======================
+
+The controller scene XML contains its original Copyright 2020 Google LLC
+notice and Apache License 2.0 header. The full Apache License text is included
+in `LICENSE-DSUITE-APACHE-2.0.txt`.
+
+Source repository and exact object hashes are recorded in `PROVENANCE.md`.
+

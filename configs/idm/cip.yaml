@@ -1,0 +1,14 @@
+# @package model
+
+idm_type: cip
+
+cip_state_source: deter
+cip_imag_last: 0
+cip_probes: 8
+cip_scale: 1.0
+cip_eps: 1e-6
+cip_positive: true
+cip_normalize: false
+cip_seed: 0
+cip_stop_reward_grad: true
+cip_replay_metric: false

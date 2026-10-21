@@ -1,0 +1,34 @@
+# @package _global_
+
+# Single-task training without detached target heads.
+envs:
+  task: robokitchen_microwave
+  eval_tasks: null
+  backend: mujoco
+  protocol: standard
+  steps: 5000000
+  env_num: 1
+  eval_episode_num: 10
+  eval_every: 100000
+  update_log_every: 5000
+  video_pred_log: false
+  video_policy_log: false
+  action_repeat: 1
+  train_ratio: 512
+  time_limit: 150
+
+  seed: ${seed}
+  device: ${device}
+
+  size: [64, 64]
+  include_image: true
+  eval_seed_offset: 1000000
+  eval_seed_bank: [1000000, 1000001, 1000002, 1000003, 1000004,
+                   1000005, 1000006, 1000007, 1000008, 1000009]
+  encoder:
+    typ: simple
+    mlp_keys: '$^'
+    cnn_keys: 'image'
+  decoder:
+    mlp_keys: '$^'
+    cnn_keys: 'image'

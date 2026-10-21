@@ -1,0 +1,24 @@
+# @package model
+
+idm_type: disagreement
+
+# Infer observation, action, and target dimensions from the environment and model.
+disag_target: same
+disag_action_cond: true
+
+# Ensemble architecture. Values of 0 inherit from the shared IDM defaults.
+disag_models: 5
+disag_units: 0
+disag_layers: 0
+disag_model_width_factor: 1.0
+disag_act: relu
+
+# Scale ensemble variance by 10,000 before the imagined actor/value update.
+disag_scale: 10000.0
+disag_log: false
+disag_normalize: false
+disag_eps: 1e-8
+
+# P2E replay loss behavior.
+disag_bootstrap: true
+disag_offset: 1

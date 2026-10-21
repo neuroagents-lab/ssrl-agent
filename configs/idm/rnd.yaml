@@ -1,0 +1,11 @@
+# @package model
+
+idm_type: rnd
+
+rnd_hidden_dim: ${model.idm_hidden_dim}
+# RND target and predictor use 512-dimensional embeddings of model latents.
+rnd_output_dim: 512
+rnd_layers: ${model.idm_n_layers}
+rnd_scale: 1.0
+rnd_normalize: true
+rnd_eps: 1e-8

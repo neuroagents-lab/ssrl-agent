@@ -1,0 +1,36 @@
+# Python and virtual environments
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.venv/
+venv/
+
+# Training outputs and local datasets
+logdir*/
+training_logs/
+runs/
+.runtime/
+local_data/
+results/
+wandb/
+source_bundles/
+*.log
+slurm-*.out
+
+# Local settings and editor files
+.env
+.env.*
+!.env.example
+.agents/
+.codex/
+.claude/
+.tools/
+.vscode/
+.idea/
+.DS_Store

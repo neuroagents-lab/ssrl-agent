@@ -1,0 +1,24 @@
+task: 'dmlab_explore_goal_locations_small'
+steps: 50e6
+env_num: 16
+eval_episode_num: 5
+eval_every: 250000
+update_log_every: 50000
+video_pred_log: False
+video_policy_log: False
+action_repeat: 4
+train_ratio: 32
+time_limit: 3600
+
+seed: ${seed}
+device: ${device}
+
+size: [64, 64]
+dmlab_action_set: 'popart'
+dmlab_runfiles_path: null
+encoder:
+  mlp_keys: '$^'
+  cnn_keys: 'image'
+decoder:
+  mlp_keys: '$^'
+  cnn_keys: 'image'

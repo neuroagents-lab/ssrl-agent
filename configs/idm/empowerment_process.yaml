@@ -1,0 +1,22 @@
+# @package model
+
+idm_type: empowerment_process
+expl_intr_scale: 10000
+use_skills: false
+
+# 'gce' = one-step feedback MI I(A;S'|S) under the policy's action covariance via
+# the learned Gaussian channel (no inner max; the RL optimizer maximizes the
+# accumulated MI, which is the feedback-capacity objective).
+# 'vlb' = Barber-Agakov particle estimate.
+empowerment_estimator: gce
+empowerment_gce_latent_dim: 64
+empowerment_gce_waterfill_iters: 32
+empowerment_gce_recon_scale: 1.0
+empowerment_gce_state_noise: false
+
+# empowerment_particles = policy action samples used to estimate the action
+# covariance Sigma_a for the process MI (and the source for estimator=vlb).
+empowerment_particles: 16
+empowerment_next_samples: 1
+empowerment_action_concat: true
+empowerment_reward_chunk_size: 0

@@ -1,0 +1,64 @@
+# @package _global_
+
+envs:
+  task: 'manipulation_panda_pick_cube'
+  eval_tasks: null
+  backend: mjx
+  mjx_actor_chunk: 1
+  steps: 1.01e6
+  env_num: 128
+  eval_episode_num: 10
+  eval_every: 50000
+  update_log_every: 5000
+  video_pred_log: False
+  video_policy_log: True
+
+  # Scalar fallbacks preserve the common trainer interface. The adapter and
+  # launcher select the task-specific values below for manipulation tasks.
+  action_repeat: 1
+  time_limit: 1000
+  action_repeat_by_task:
+    manipulation_aloha_hand_over: 1
+    manipulation_aloha_single_peg_insertion: 2
+    manipulation_panda_pick_cube: 1
+    manipulation_panda_pick_cube_orientation: 1
+    manipulation_panda_pick_cube_cartesian: 1
+    manipulation_panda_open_cabinet: 1
+    manipulation_panda_robotiq_push_cube: 4
+    manipulation_leap_cube_reorient: 1
+    manipulation_leap_cube_rotate_z_axis: 1
+    manipulation_aero_cube_rotate_z_axis: 1
+  time_limit_by_task:
+    manipulation_aloha_hand_over: 250
+    manipulation_aloha_single_peg_insertion: 1000
+    manipulation_panda_pick_cube: 150
+    manipulation_panda_pick_cube_orientation: 150
+    manipulation_panda_pick_cube_cartesian: 200
+    manipulation_panda_open_cabinet: 150
+    manipulation_panda_robotiq_push_cube: 3000
+    manipulation_leap_cube_reorient: 1000
+    manipulation_leap_cube_rotate_z_axis: 500
+    manipulation_aero_cube_rotate_z_axis: 500
+
+  train_ratio: 512
+  seed: ${seed}
+  device: ${device}
+
+  size: [64, 64]
+  include_image: False
+  # Array-valued tasks use "vector". Leap and Aero expose both "state" and
+  # "privileged_state"; only state is made visible to the policy and replay.
+  observation_keys: [vector, state]
+  eval_seed_offset: 1000000
+  eval_seed_bank: [1000000, 1000001, 1000002, 1000003, 1000004,
+                   1000005, 1000006, 1000007, 1000008, 1000009]
+  encoder:
+    mlp_keys: '^(vector|state)$'
+    cnn_keys: '$^'
+  decoder:
+    mlp_keys: '^(vector|state)$'
+    cnn_keys: '$^'
+
+model:
+  expl_behavior: "greedy"
+  idm_type: "none"

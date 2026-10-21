@@ -1,0 +1,22 @@
+# @package model
+
+idm_type: dads
+idm_reward_normalize: true
+idm_reward_norm_source: replay_only
+idm_hidden_dim: 512
+idm_n_layers: 2
+use_skills: true
+skill_space: box
+num_skills: 2
+skill_dim: 2
+skill_horizon: 200
+skill_embed_dim: 0
+dads_prior: uniform_box
+dads_prior_kwargs:
+  low: -1.0
+  high: 1.0
+dads_entropy_coef: 0.0
+dads_use_marginal_model: false
+# The authors' Ant-XY reference configuration samples 100 alternative skills.
+dads_marginal_samples: 100
+dads_replay_batch_size: 256

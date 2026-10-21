@@ -1,0 +1,17 @@
+# @package model
+
+idm_type: vic
+idm_hidden_dim: 256
+use_skills: true
+skill_space: categorical
+num_skills: 12
+skill_dim: 0
+skill_horizon: ${model.imag_horizon}
+skill_embed_dim: 0
+vic_prior: uniform_categorical
+vic_entropy_coef: 0.0
+vic_condition_on_start: true
+vic_reward_at_end: true
+vic_replay_batch_size: 512
+continuous_skill_posterior: dot_product
+continuous_skill_temperature: 0.1

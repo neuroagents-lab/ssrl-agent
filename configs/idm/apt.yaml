@@ -1,0 +1,14 @@
+# @package model
+
+idm_type: apt
+
+apt_rep_dim: 256
+apt_k: 16
+# Normalize particle distances by their running mean.
+apt_knn_clip: 0.0005
+apt_normalize_phi: true
+apt_train_phi: true
+apt_reward_normalize: true
+apt_knn_chunk_size: 1024
+apt_memory_size: 2048
+apt_memory_sample_size: 2048

@@ -1,0 +1,7 @@
+# @package model
+
+idm_type: gamma_progress
+
+progress_scale: 1.0
+# Kim et al. use this slow-copy decay in every reported experiment.
+gamma_progress_gamma: 0.9995

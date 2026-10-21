@@ -1,0 +1,28 @@
+# @package _global_
+
+defaults:
+  - dmc_walker_multitask_vision
+  - _self_
+
+# Keep the parent's image-only native dm_control observation schema.
+envs:
+  task: dmc_walker_stand
+  eval_tasks: null
+  protocol: standard
+  backend: dm_control
+  env_num: 16
+  steps: 200000
+  eval_every: 20000
+  eval_action_selections: [greedy]
+  adaptation_env_config: dmc_walker_adaptation_vision
+  adaptation_parent_task: dmc_walker_stand
+  adaptation_parent_env_config: dmc_walker_multitask_vision
+  adaptation_parent_steps: 1010000
+
+model:
+  eval_task_heads: false
+  train_base_task_behavior: true
+  strict_task_blind_pretraining: false
+
+trainer:
+  eval_action_selections: [greedy]

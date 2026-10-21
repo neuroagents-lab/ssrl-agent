@@ -1,0 +1,26 @@
+task: craftax_full
+steps: 1.01e6
+env_num: 1
+eval_episode_num: 10
+eval_every: 100000
+update_log_every: 5000
+video_pred_log: False
+video_policy_log: False
+action_repeat: 1
+train_ratio: 512
+time_limit: 100000
+
+seed: ${seed}
+device: ${device}
+
+size: [64, 64]
+include_image: True
+observation_mode: symbolic
+logs: True
+encoder:
+  typ: simple
+  mlp_keys: 'vector'
+  cnn_keys: 'image'
+decoder:
+  mlp_keys: 'vector'
+  cnn_keys: 'image'

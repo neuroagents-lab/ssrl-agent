@@ -1,0 +1,56 @@
+# Dependencies for Linux x86_64, Python 3.11, and NVIDIA CUDA 12.
+# Install with: python -m pip install -r requirements.txt
+# Direct dependencies and compatibility-sensitive versions are pinned.
+# Includes training, tests, and the DINOv2 feature encoder.
+
+# JAX training runtime
+jax[cuda12]==0.5.3
+chex==0.1.90
+einops==0.8.1
+elements==3.22.0
+flax==0.10.4
+ml-dtypes==0.5.4
+ninjax==3.6.3
+numpy==1.26.4
+optax==0.2.5
+portal==3.8.1
+zstandard==0.22.0
+
+# Configuration and environment interfaces
+hydra-core==1.3.2
+omegaconf==2.3.0
+gymnasium==1.2.3
+cloudpickle==3.1.2
+lxml==6.0.2
+packaging==26.0
+pillow==12.3.0
+ruamel-yaml==0.19.1
+
+# Experiment environments
+craftax==1.6.1
+crafter==1.8.3
+dm-control==1.0.37
+mujoco==3.5.0
+mujoco-mjx==3.5.0
+playground==0.1.0
+
+# Compatible dependencies for the pinned JAX and environment versions
+brax==0.12.5
+orbax-checkpoint==0.11.22
+scipy==1.17.1
+tensorstore==0.1.79
+warp-lang==1.11.1
+
+# Training metrics and video logging
+scope==0.6.3
+wandb==0.23.1
+moviepy==1.0.3
+imageio==2.37.2
+imageio-ffmpeg==0.6.0
+
+# DINOv2 feature encoder
+torch==2.9.1
+torchvision==0.24.1
+
+# Tests
+pytest==9.0.3

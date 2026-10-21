@@ -1,0 +1,15 @@
+# @package _global_
+
+trainer:
+  pretrain: 0
+
+model:
+  compile: True
+  train_base_task_behavior: True
+  expl_behavior: "greedy"
+  expl_until: 0
+  expl_intr_scale: 0.0
+  expl_extr_scale: 0.0
+  expl_grad_mode: "detached"
+  idm_reward_normalize: False
+  idm_type: "none"

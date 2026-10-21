@@ -1,0 +1,18 @@
+# @package _global_
+
+defaults:
+  - dmc_walker_multitask
+  - _self_
+
+# Preserve the stand-source protocol and schedule; learn from pixels only.
+envs:
+  include_image: true
+  include_proprio: false
+  size: [64, 64]
+  encoder:
+    typ: simple
+    mlp_keys: '$^'
+    cnn_keys: 'image'
+  decoder:
+    mlp_keys: '$^'
+    cnn_keys: 'image'

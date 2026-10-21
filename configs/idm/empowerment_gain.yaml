@@ -1,0 +1,18 @@
+# @package model
+
+idm_type: empowerment_gain
+idm_reward_normalize: true
+expl_intr_scale: 10000
+idm_hidden_dim: 400
+idm_n_layers: 5
+use_skills: false
+
+# Gamma-Progress-style empowerment learning progress. The fast Latent-GCE
+# channel is trained normally; the trailing channel is a slow parameter copy.
+# Reward is current channel capacity minus trailing channel capacity.
+empowerment_gain_gamma: 0.9995
+empowerment_gce_latent_dim: 64
+empowerment_gce_power: 1.0
+empowerment_gce_waterfill_iters: 32
+empowerment_gce_recon_scale: 1.0
+empowerment_gce_state_noise: false

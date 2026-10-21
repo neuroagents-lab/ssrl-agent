@@ -1,0 +1,19 @@
+# @package model
+
+idm_type: diayn
+idm_reward_norm_source: replay_only
+idm_hidden_dim: 300
+idm_n_layers: 2
+use_skills: true
+skill_space: categorical
+num_skills: 50
+skill_dim: 0
+# The reference implementation holds a skill for the full episode.
+skill_horizon: 0
+skill_embed_dim: 0
+diayn_prior: uniform_categorical
+diayn_entropy_coef: 0.0
+# Discriminator minibatch size.
+diayn_replay_batch_size: 128
+continuous_skill_posterior: dot_product
+continuous_skill_temperature: 0.1

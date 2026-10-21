@@ -1,0 +1,27 @@
+# @package _global_
+
+defaults:
+  - dmc_vision
+  - _self_
+
+# Supervised from-scratch control for the Walker Run adaptation comparison.
+envs:
+  task: dmc_walker_run
+  backend: dm_control
+  protocol: standard
+  include_proprio: false
+  steps: 200000
+  eval_every: 20000
+  eval_action_selections: [greedy]
+  video_policy_log: false
+
+trainer:
+  eval_action_selections: [greedy]
+
+adaptation:
+  enabled: false
+
+model:
+  eval_task_heads: false
+  train_base_task_behavior: true
+  strict_task_blind_pretraining: false

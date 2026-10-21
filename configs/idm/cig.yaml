@@ -1,0 +1,29 @@
+# @package model
+
+idm_type: cig
+
+# Joseph et al. (2026), "CIG: Exploration via Conditional Information Gain".
+# https://arxiv.org/abs/2605.20878v1
+# The independently initialized one-step predictors all receive the same replay
+# transitions and are trained by MSE; CIG differs from Plan2Explore only in how
+# their imagined-rollout disagreement is converted into intrinsic reward.
+cig_models: 5
+cig_hidden_dim: 400
+cig_layers: 4
+cig_act: elu
+cig_scale: 1.0
+
+# Table 1 evaluates the trajectory objective over 15 imagined transitions.
+imag_horizon: 15
+
+# Paper Eq. 7 uses sigma_hat^2 * d * I without a tuned multiplier. sigma_hat^2
+# is the scalar ensemble-mean residual MSE maintained by Algorithm 2.
+cig_ridge_scale: 1.0
+cig_aleatoric_ema: 0.99
+
+# Table 1 uses per-step z-score reward normalization with EMA statistics.
+cig_normalize: true
+cig_reward_ema: 0.99
+
+# Absolute numerical ridge floor, normally active only before the first update.
+cig_eps: 1e-8

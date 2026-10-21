@@ -1,0 +1,25 @@
+# @package _global_
+
+trainer:
+  pretrain: 100
+
+model:
+  compile: True
+  # Concurrent multitask profiles disable this once detached task heads are
+  # configured; ordinary single-task P2E still needs its extrinsic evaluator.
+  train_base_task_behavior: True
+  expl_behavior: "plan2explore"
+  expl_until: 0
+  expl_intr_scale: 1.0
+  expl_extr_scale: 0.0
+  idm_reward_normalize: False
+  idm_type: "disagreement"
+  plan_repr_source: "deter"
+  expl_repr_mode: "shared_head"
+  expl_imag_repr_mode: "bridge"
+  expl_grad_mode: "head_only"
+  expl_head_type: "identity"
+  adaptive_critic:
+    critics: "expl_value"
+  idm_hidden_dim: 1024
+  idm_n_layers: 2

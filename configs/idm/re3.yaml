@@ -1,0 +1,13 @@
+# @package model
+
+idm_type: re3
+
+re3_rep_dim: 50
+re3_k: 53
+# Dreamer-RE3's beta coefficient.
+re3_scale: 0.1
+re3_log_reward: false
+re3_reward_normalize: true
+re3_knn_chunk_size: 1024
+re3_memory_size: 2048
+re3_memory_sample_size: 2048

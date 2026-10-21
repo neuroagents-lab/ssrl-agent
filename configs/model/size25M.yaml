@@ -1,0 +1,8 @@
+defaults:
+  - _base_
+
+deter: 3072
+hidden: 384
+discrete: 24
+depth: 24
+units: 384

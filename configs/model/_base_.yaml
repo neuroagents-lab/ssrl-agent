@@ -1,0 +1,481 @@
+act_entropy: 3e-4
+kl_free: 1.0
+imag_horizon: 15
+imag_gradient: "dynamics" # dynamics/reinforce/both
+imag_gradient_mix: 0.0
+horizon: 333
+lamb: 0.95
+compile: True
+policy_checks: False
+precision: 16
+num_actions: 0
+log_grads: False
+device: ${device}
+rep_loss: "dreamer" # dreamer/r2dreamer/ne_dreamer/dreamerpro
+eval_task_heads: null # null auto-enables per-task actors for supported multi-task suites.
+train_base_task_behavior: true
+# Strict pretraining isolates task reward from the world model and exploration
+# policy; detached task heads learn from it for evaluation.
+strict_task_blind_pretraining: false
+reward_grad: true
+repval_loss: true
+repval_grad: true
+task_head_loss_scales:
+  rew: 1.0
+  policy: 1.0
+  value: 1.0
+  repval: 0.3
+
+ne_dreamer:
+  hidden_dim: 256
+  num_layers: 2
+  num_heads: 4
+  dropout: 0.0
+  use_actions: True
+  use_projector: True
+  use_same: False
+  use_next: True
+  predict_horizon: 1
+  horizon_discount: 0.9
+  loss_type: "barlow"
+  lambd: 5e-4
+  weight_same: 1.0
+  weight_next: 1.0
+  max_seq_len: 128
+
+# DreamerV3 model dimensions; configs/model/size*.yaml override capacity.
+deter: 8192
+hidden: 1024
+discrete: 64
+depth: 64
+units: 1024
+act: 'SiLU'
+norm: True
+
+# Plan2Explore and intrinsic drive modules
+expl_behavior: "greedy" # greedy/random/plan2explore
+expl_until: 0           # 0 keeps exploration active throughout training.
+expl_extr_scale: 0.0
+expl_intr_scale: 1.0
+use_skills: False
+num_skills: 10
+skill_space: "categorical"
+skill_dim: 0
+skill_embed_dim: 0
+skill_horizon: 0
+idm_type: "disagreement" # Select an implementation through configs/idm/*.yaml.
+plan_repr_source: "stoch"
+expl_repr_mode: "raw_plan"
+expl_imag_repr_mode: "bridge"
+expl_grad_mode: "detached"
+expl_repr_dim: 0
+expl_head_type: "mlp"
+expl_head_hidden_dim: 256
+expl_head_layers: 2
+expl_obs_encoder_type: null
+expl_obs_hidden_dim: 256
+expl_obs_layers: 2
+expl_rnn_hidden_dim: 0
+expl_rnn_batch_chunk_size: 256
+expl_obs_cnn_depth: 0
+expl_obs_cnn_kernel_size: 0
+expl_obs_cnn_minres: 0
+expl_obs_cnn_chunk_size: 1024
+expl_bridge_hidden_dim: 256
+expl_bridge_layers: 2
+expl_bridge_loss_weight: 1.0
+expl_bridge_consistency_weight: 1.0
+expl_bridge_target_ema: False
+expl_bridge_target_ema_momentum: 0.99
+idm_hidden_dim: 256
+idm_n_layers: 2
+idm_output_dim: 256
+icm_proj_dim: 0
+icm_proj_hidden_dim: 0
+icm_proj_layers: 1
+icm_forward_loss_weight: 0.2
+icm_scale: 0.01
+simple_curiosity_scale: 1.0
+rnd_output_dim: 512
+idm_reward_normalize: False
+idm_reward_normalize_eps: 1e-8
+idm_reward_norm_source: "replay_only"
+disag_models: 5
+disag_target: "same"
+disag_bootstrap: True
+disag_model_width_factor: 1.0
+disag_units: 0
+disag_layers: 0
+disag_scale: 10000.0
+disag_action_cond: True
+disag_act: "relu"
+disag_log: False
+disag_normalize: False
+disag_eps: 1e-8
+disag_offset: 1
+rnd_normalize: True
+ngu_rep_dim: 32
+ngu_k: 10
+ngu_kernel_epsilon: 1e-4
+ngu_cluster_distance: 8e-3
+ngu_pseudo_count_c: 1e-3
+ngu_max_similarity: 8.0
+ngu_lifelong_clip: 5.0
+ngu_use_rnd: True
+ngu_rnd_hidden_dim: 0
+ngu_rnd_output_dim: 0
+ngu_rnd_layers: 2
+ngu_inverse_coef: 1.0
+ngu_rnd_coef: 1.0
+ngu_vectorized_scan: True
+ngu_update_tail: 0
+ngu_scale: 0.3
+vime_prior_sigma: 1.0
+vime_posterior_rho_init: -5.0
+vime_likelihood_std: 1.0
+vime_kl_scale: 1.0
+vime_info_gain_step_size: 1.0
+vime_reward_history_size: 100
+vime_reward_chunk_size: 32
+vime_reward_samples: 5
+vime_train_mc_samples: 1
+gamma_progress_gamma: 0.9995
+empowerment_gain_gamma: 0.9995
+empowerment_particles: 16
+empowerment_next_samples: 1
+empowerment_q_loss_weight: 1.0
+empowerment_action_concat: False
+empowerment_reward_chunk_size: 0
+vic_prior: "uniform_categorical"
+vic_prior_kwargs: null
+vic_entropy_coef: 0.0
+vic_condition_on_start: True
+vic_reward_at_end: True
+vic_replay_batch_size: 0
+diayn_prior: "uniform_categorical"
+diayn_prior_kwargs: null
+diayn_entropy_coef: 0.0
+diayn_replay_batch_size: 128
+dads_prior: "uniform_categorical"
+dads_prior_kwargs: null
+dads_entropy_coef: 0.0
+dads_use_marginal_model: False
+dads_marginal_samples: 100
+dads_replay_batch_size: 256
+rdads_prior: "uniform_categorical"
+rdads_prior_kwargs: null
+rdads_entropy_coef: 0.0
+rdads_replay_batch_size: 256
+valor_prior: "uniform_categorical"
+valor_prior_kwargs: null
+valor_entropy_coef: 0.0
+valor_mlp_layers: 1
+valor_num_subseq: 11
+valor_reward_at_end: True
+valor_subtract_log_prior: True
+valor_head_hidden_dim: 0
+valor_replay_batch_size: 0
+continuous_skill_posterior: "dot_product"
+continuous_skill_temperature: 0.1
+apt_rep_dim: 256
+apt_k: 16
+apt_knn_clip: 0.0005
+apt_normalize_phi: True
+apt_train_phi: True
+apt_reward_normalize: True
+apt_knn_chunk_size: 1024
+apt_memory_size: 2048
+apt_memory_sample_size: 2048
+re3_rep_dim: 50
+re3_k: 53
+re3_scale: 0.1
+re3_log_reward: False
+re3_reward_normalize: True
+re3_knn_chunk_size: 1024
+re3_memory_size: 2048
+re3_memory_sample_size: 2048
+csf_prior: null
+csf_prior_kwargs: null
+csf_proj_dim: 0
+csf_proj_hidden_dim: 1024
+csf_proj_layers: 2
+csf_reward_mode: "inner"
+csf_posterior: "dot_product"
+csf_temperature: 1.0
+csf_normalize_features: False
+csf_normalize_skills: False
+csf_input_norm: "none"
+csf_input_norm_eps: 1e-3
+csf_xi: 5.0
+csf_num_negatives: 256
+csf_sample_prior_negatives: true
+csf_exclude_positive_from_negatives: True
+csf_replay_batch_size: 256
+csf_offset: 1
+proto_rl_rep_dim: 128
+proto_rl_pred_dim: 512
+proto_rl_num_prototypes: 512
+proto_rl_candidates_per_prototype: 4
+proto_rl_temperature: 0.1
+proto_rl_sinkhorn_iters: 3
+proto_rl_target_momentum: 0.95
+proto_rl_knn_k: 3
+proto_rl_reward_normalize: False
+max_models: 5
+max_hidden_dim: 256
+max_layers: 2
+max_chunk_size: 0
+max_scale: 1.0
+max_lambda: 0.1
+max_min_log_var: -10.0
+max_max_log_var: 2.0
+max_normalize: False
+smm_latent_dim: 128
+smm_hidden_dim: 150
+smm_layers: 2
+smm_scale: 1.0
+smm_kl_scale: 0.5
+smm_target: "uniform"
+smm_log_target_const: 0.0
+smm_min_log_var: -7.0
+smm_max_log_var: 2.0
+smm_reward_normalize: False
+ctec_rep_dim: 64
+ctec_hidden_dim: 1024
+ctec_layers: 2
+ctec_gamma: 0.99
+ctec_temperature: 1.0
+ctec_learn_temperature: True
+ctec_similarity: "l1"
+ctec_loss_type: "infonce"
+ctec_normalize_embeddings: True
+ctec_replay_batch_size: 256
+ctec_reward_estimator: "single"
+ctec_reward_normalize_truncation: False
+cip_state_source: "deter"
+cip_imag_last: 0
+cip_imag_start_strategy: "last"
+cip_probes: 8
+cip_scale: 1.0
+cip_eps: 1e-6
+cip_positive: True
+cip_normalize: False
+cip_seed: 0
+cip_stop_reward_grad: True
+cip_replay_metric: False
+imag_last: 0
+# Scale behavior/reconstruction budgets relative to train ratio 64.
+# Zero disables automatic budgeting; imag_last/recon_last override sequence counts.
+imag_start_ratio: 64.0
+imag_start_strategy: null
+recon_last: 0
+recon_start_ratio: 64.0
+recon_start_strategy: null
+
+lr: 4e-5
+model_lr: ${model.lr}
+agc: 0.3
+pmin: 1e-3
+eps: 1e-20
+opt_eps: ${model.eps}
+beta1: 0.9
+beta2: 0.999
+warmup: 1000
+grad_clip: 100.0
+weight_decay: 0.0
+opt: "adam"
+slow_target_update: 1
+slow_target_fraction: 0.02
+
+adaptive_critic:
+  enabled: False
+  critics: "value"
+  scope: "output"
+  granularity: "feature"
+  meta_lr: 1e-3
+  trace_decay: 0.9
+  init_scale: 1.0
+  min_scale: 0.25
+  max_scale: 4.0
+  warmup: ${model.warmup}
+  eps: 1e-8
+
+loss_scales:
+  barlow: 0.05
+  infonce: 1.0
+  recon: 1.0
+  rew: 1.0
+  con: 1.0
+  dyn: 1.0
+  rep: 0.1
+  policy: 1.0
+  value: 1.0
+  repval: 0.3
+  ne_dreamer: 1.0
+  swav: 1.0
+  temp: 1.0
+  norm: 1.0
+
+r2dreamer:
+  lambd: 5e-4
+
+dreamer_pro:
+  warm_up: 1
+  num_prototypes: 2500
+  proto_dim: 32
+  temperature: 0.1
+  sinkhorn_eps: 0.05
+  sinkhorn_iters: 3
+  ema_update_every: 1
+  ema_update_fraction: 0.05
+  freeze_prototypes_iters: 10000
+  aug:
+    max_delta: 3.0
+    same_across_time: True
+    bilinear: True
+
+rssm:
+  stoch: 32
+  deter: ${model.deter}
+  hidden: ${model.hidden}
+  discrete: ${model.discrete}
+  unroll: 1
+  img_layers: 2
+  obs_layers: 1
+  dyn_layers: 1
+  blocks: 8
+  act: ${model.act}
+  norm: ${model.norm}
+  unimix_ratio: 0.01
+  initial: 'learned'
+  device: ${device}
+
+dyn_stoch: ${model.rssm.stoch}
+dyn_deter: ${model.rssm.deter}
+dyn_discrete: ${model.rssm.discrete}
+
+encoder:
+  typ: ${oc.select:envs.encoder.typ,simple}
+  mlp_keys: ${envs.encoder.mlp_keys}
+  cnn_keys: ${envs.encoder.cnn_keys}
+  mlp:
+    shape: null
+    layers: 3
+    units: ${model.units}
+    act: ${model.act}
+    norm: ${model.norm}
+    device: ${device}
+    outscale: null
+    symlog_inputs: True
+    name: 'mlp_encoder'
+  cnn:
+    act: ${model.act}
+    norm: ${model.norm}
+    kernel_size: 5
+    minres: 4
+    depth: ${model.depth}
+    mults: [2, 3, 4, 4]
+  dinov2:
+    model_name: dinov2_vits14
+    source: torchhub
+    image_key: image
+    feature_key: dinov2
+    feature: cls
+    image_size: 224
+    device: auto
+    batch_size: 64
+    keep_image_log: true
+    feature_dim: 0
+
+decoder:
+  mlp_keys: ${envs.decoder.mlp_keys}
+  cnn_keys: ${envs.decoder.cnn_keys}
+  mlp_dist:
+    name: 'symlog_mse'
+  cnn_dist:
+    name: 'mse'
+  mlp:
+    shape: null
+    layers: 3
+    units: ${model.units}
+    act: ${model.act}
+    norm: ${model.norm}
+    dist:
+      name: 'identity'
+    device: ${device}
+    outscale: 1.0
+    symlog_inputs: False
+    name: 'mlp_decoder'
+  cnn:
+    depth: ${model.depth}
+    units: ${model.units}
+    bspace: 8
+    mults: [2, 3, 4, 4]
+    act: ${model.act}
+    norm: ${model.norm}
+    kernel_size: 5
+    minres: 4
+    outscale: 1.0
+
+reward:
+  shape: [255,]
+  layers: 1
+  units: ${model.units}
+  act: ${model.act}
+  norm: ${model.norm}
+  dist:
+    name: 'symexp_twohot'
+    bin_num: 255
+  outscale: 0.0
+  device: ${device}
+  symlog_inputs: False
+  name: 'reward'
+
+cont:
+  shape: [1,]
+  layers: 1
+  units: ${model.units}
+  act: ${model.act}
+  norm: ${model.norm}
+  dist:
+    name: 'binary'
+  outscale: 1.0
+  device: ${device}
+  symlog_inputs: False
+  name: 'cont'
+
+actor:
+  shape: null
+  layers: 3
+  units: ${model.units}
+  act: ${model.act}
+  norm: ${model.norm}
+  device: ${device}
+  dist:
+    cont:
+      name: 'bounded_normal'
+      min_std: 0.1
+      max_std: 1.0
+    disc:
+      name: 'onehot'
+      unimix_ratio: 0.01
+    multi_disc:
+      name: 'multi_onehot'
+      unimix_ratio: 0.01
+  outscale: 0.01
+  symlog_inputs: False
+  name: 'actor'
+
+critic:
+  shape: [255,]
+  layers: 3
+  units: ${model.units}
+  act: ${model.act}
+  norm: ${model.norm}
+  device: ${device}
+  dist:
+    name: 'symexp_twohot'
+    bin_num: 255
+  outscale: 0.0
+  symlog_inputs: False
+  name: 'value'

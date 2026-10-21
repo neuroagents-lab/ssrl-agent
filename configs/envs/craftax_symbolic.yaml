@@ -1,0 +1,29 @@
+task: craftax_symbolic
+steps: 1.01e6
+env_num: 1
+device_batch: True
+device_actor_chunk: 1
+optimistic_reset_ratio: 16
+eval_episode_num: 10
+eval_every: 100000
+update_log_every: 5000
+video_pred_log: False
+video_policy_log: False
+video_policy_max_frames: 1000
+action_repeat: 1
+train_ratio: 32
+time_limit: 100000
+
+seed: ${seed}
+device: ${device}
+
+size: [64, 64]
+include_image: False
+observation_mode: symbolic
+logs: True
+encoder:
+  mlp_keys: 'vector'
+  cnn_keys: '$^'
+decoder:
+  mlp_keys: 'vector'
+  cnn_keys: '$^'

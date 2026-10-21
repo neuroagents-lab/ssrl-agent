@@ -1,0 +1,20 @@
+# @package model
+
+idm_type: valor
+idm_hidden_dim: 256
+use_skills: true
+skill_space: categorical
+num_skills: 12
+skill_dim: 0
+skill_horizon: ${model.imag_horizon}
+skill_embed_dim: 0
+valor_prior: uniform_categorical
+valor_entropy_coef: 0.0
+valor_mlp_layers: 1
+valor_num_subseq: 11
+valor_reward_at_end: true
+valor_subtract_log_prior: true
+valor_head_hidden_dim: 0
+valor_replay_batch_size: 128
+continuous_skill_posterior: dot_product
+continuous_skill_temperature: 0.1

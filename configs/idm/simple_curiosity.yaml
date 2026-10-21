@@ -1,0 +1,6 @@
+# @package model
+
+# Forward and inverse prediction over the world-model representation.
+idm_type: simple_curiosity
+
+simple_curiosity_scale: 1.0

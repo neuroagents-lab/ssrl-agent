@@ -1,0 +1,18 @@
+# @package model
+
+idm_type: ctec
+
+ctec_rep_dim: 64
+ctec_hidden_dim: ${model.idm_hidden_dim}
+ctec_layers: 2
+ctec_scale: 1.0
+ctec_gamma: 0.99
+ctec_temperature: 1.0
+ctec_learn_temperature: true
+ctec_similarity: l1
+ctec_loss_type: infonce
+ctec_normalize_embeddings: true
+# The reference implementation draws one geometrically weighted future state.
+ctec_reward_estimator: single
+ctec_reward_normalize_truncation: false
+ctec_replay_batch_size: 256
